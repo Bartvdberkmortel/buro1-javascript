@@ -1,3 +1,9 @@
+body{
+    background-color: aliceblue;
+}
+
+
+
 .bounce, .bounce2, .bounce3 {
     height: 100px;
     width: 100px;
