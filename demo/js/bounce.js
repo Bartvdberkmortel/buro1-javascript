@@ -10,7 +10,7 @@ var Bounce = function(selector, settings) {
      */
     var defaultSettings = {
         selector: '.bounce',
-        gravity: 9.81,
+        gravity: 1,
         updateSpeed: 1 //In milliseconds
     };
 
@@ -25,6 +25,7 @@ var Bounce = function(selector, settings) {
      * @type {number}
      */
     var speedY;
+	var speedX;
 
     /**
      * The timer that updates the model and the screen
@@ -63,6 +64,10 @@ var Bounce = function(selector, settings) {
         if(element.parentElement.clientHeight <= position.y + element.clientHeight) {
             speedY = -speedY;
         }
+		
+		if(element.parentElement.clientWidth <= position.x + element.clientWidth) {
+            speedX = -speedX;
+        }
 
         updateElement();
     };
@@ -71,8 +76,9 @@ var Bounce = function(selector, settings) {
      * Update the variables to the new reality
      */
     var update = function() {
-        move(0, speedY);
+        move(speedX, speedY);
         speedY += defaultSettings.gravity * (defaultSettings.updateSpeed/1000);
+		speedX += defaultSettings.gravity * (defaultSettings.updateSpeed/1000);
     };
 
     /**
@@ -98,6 +104,7 @@ var Bounce = function(selector, settings) {
         selector = selector || defaultSettings.selector;
         element = document.querySelector(selector);
         speedY = 0;
+		speedX = 0;
         timer = setInterval(update, defaultSettings.updateSpeed);
     };
 
